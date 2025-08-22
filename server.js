@@ -12,10 +12,13 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-
-  origin: '*',
-  
+  origin: [
+    "http://localhost:5173",           // for local dev
+    "https://e-commerce-b-5k3b.vercel.app/"      // for live deployment
+  ],
+  credentials: true
 }));
+
 
 
 app.use(express.json());
