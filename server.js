@@ -12,9 +12,11 @@ const app = express();
 
 // Middlewares
 app.use(cors({
+
   origin: process.env.VITE_FRONTEND_URL,
   credentials: true
 }));
+
 
 app.use(express.json());
 
