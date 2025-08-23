@@ -1,3 +1,4 @@
+
 {
   "version": 2,
   "builds": [
@@ -5,12 +6,22 @@
       "src": "server.js",
       "use": "@vercel/node",
       "config": { "includeFiles": ["dist/**"] }
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+  
+    {
+      "src": "/(auth|cart|contact|other-backend-routes)(.*)?",
+      "dest": "server.js"
+    },
+   
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/index.html"
     }
   ]
 }
