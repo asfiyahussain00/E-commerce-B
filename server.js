@@ -11,15 +11,12 @@ dotenv.config();
 
 const app = express();
 
-// CORS: allow frontend URL from environment variable
+// ✅ CORS for live frontend
 app.use(cors({
-  origin: [
-    "https://e-commerce-b-5k3b.vercel.app"
-  ],
+  origin: ["https://e-commerce-b-sg3p.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
-
 
 app.use(express.json());
 
