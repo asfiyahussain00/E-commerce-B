@@ -61,14 +61,16 @@ const app = express();
 app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 
-app.get("/", (req, res) => res.json({ status: "ok", app: "ecommerce-backend" }));
-
+app.get("/", (req, res) => res.json({ status: "ok" }));
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/contact", contactRoutes);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI);
+// MongoDB connection (serverless friendly)
+mongoose.connect(process.env.MONGO_URI, {
+  keepAlive: true,
+  maxPoolSize: 10,
+});
 
 // Export as serverless function
 export default serverless(app);
