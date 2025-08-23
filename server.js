@@ -5,21 +5,17 @@ import dotenv from "dotenv";
 
 import authRoutes from "./Routes/auth.js";
 import cartRoutes from "./Routes/cart.js";
-import contactRoutes from "./Routes/contact.js"; // <-- new
+import contactRoutes from "./Routes/contact.js";
+
 dotenv.config();
 
 const app = express();
 
-// Middlewares
-
-// Allow all origins temporarily
+// CORS: allow frontend URL from environment variable
 app.use(cors({
-  origin: "*",
+  origin: process.env.VITE_FRONTEND_URL || "*",
   credentials: true
 }));
-
-
-
 
 app.use(express.json());
 
@@ -29,7 +25,7 @@ app.get("/", (req, res) => res.json({ status: "ok", app: "ecommerce-backend" }))
 // Routes
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
-app.use("/contact", contactRoutes); // <-- add this
+app.use("/contact", contactRoutes);
 
 // DB connect + server start
 const PORT = process.env.PORT || 5000;
@@ -39,10 +35,9 @@ mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected");
-    app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   })
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err.message);
     process.exit(1);
   });
-
