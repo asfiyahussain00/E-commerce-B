@@ -11,13 +11,13 @@ dotenv.config();
 const app = express();
 
 // Middlewares
+
+// Allow all origins temporarily
 app.use(cors({
-  origin: [
-    "http://localhost:5173",           // for local dev
-    "https://e-commerce-b-5k3b.vercel.app/"      // for live deployment
-  ],
+  origin: "*",
   credentials: true
 }));
+
 
 
 
