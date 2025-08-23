@@ -13,9 +13,13 @@ const app = express();
 
 // CORS: allow frontend URL from environment variable
 app.use(cors({
-  origin: process.env.VITE_FRONTEND_URL || "*",
-  credentials: true
+  origin: [
+    "https://e-commerce-b-sg3p.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 app.use(express.json());
 
